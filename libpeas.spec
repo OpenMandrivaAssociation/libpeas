@@ -21,7 +21,7 @@ BuildRequires:  gtk+3-devel
 %else
 BuildRequires:  gtk+2-devel
 %endif
-BuildRequires:  gobject-introspection-devel
+BuildRequires:  gobject-introspection-devel >= 0.9.2
 BuildRequires:  python-gobject-devel
 BuildRequires:  seed-devel
 BuildRequires:  gtk-doc
