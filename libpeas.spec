@@ -7,7 +7,7 @@
 %define build_gtk3 1
 
 Name:           libpeas
-Version:        0.5.2
+Version:        0.5.3
 Release:        %mkrel 1
 Summary:        Library for plugin handling
 
