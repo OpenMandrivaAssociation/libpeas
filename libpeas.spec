@@ -4,10 +4,10 @@
 %define libnameui %mklibname peasui %major
 %define develname %mklibname -d peas
 
-%define build_gtk3 1
+%define build_gtk3 0
 
 Name:           libpeas
-Version:        0.5.3
+Version:        0.5.4
 Release:        %mkrel 1
 Summary:        Library for plugin handling
 
