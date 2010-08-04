@@ -4,7 +4,7 @@
 %define libnameui %mklibname peasui %major
 %define develname %mklibname -d peas
 
-%define build_gtk3 0
+%define build_gtk3 1
 
 Name:           libpeas
 Version:        0.5.4
