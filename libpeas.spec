@@ -1,13 +1,13 @@
 %define api 1.0
 %define major 0
 %define libname %mklibname peas %major
-%define libnameui %mklibname peasui %major
+%define libnamegtk %mklibname peas-gtk %major
 %define develname %mklibname -d peas
 
 %define build_gtk3 1
 
 Name:           libpeas
-Version:        0.5.4
+Version:        0.5.5
 Release:        %mkrel 1
 Summary:        Library for plugin handling
 
@@ -18,8 +18,6 @@ Source0: http://ftp.gnome.org/pub/GNOME/sources/%name/%{name}-%{version}.tar.bz2
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root
 %if %build_gtk3
 BuildRequires:  gtk+3-devel
-%else
-BuildRequires:  gtk+2-devel
 %endif
 BuildRequires:  gobject-introspection-devel >= 0.9.2
 BuildRequires:  python-gobject-devel
@@ -45,19 +43,19 @@ Requires: %name-data >= %version
 %description -n %{libname}
 This is GNOME's plugin handling library.
 
-%package -n %{libnameui}
+%package -n %{libnamegtk}
 Summary:	Library plugin handling UI part
 Group:		System/Libraries
 Requires: %name-data >= %version
 
-%description -n %{libnameui}
+%description -n %{libnamegtk}
 This is GNOME's plugin handling library - user interface part.
 
 %package -n %develname
 Summary:        Development files for %{name}
 Group:          Development/C
 Requires:       %{libname} = %{version}-%{release}
-Requires:       %{libnameui} = %{version}-%{release}
+Requires:       %{libnamegtk} = %{version}-%{release}
 Provides:	%name-devel = %version-%release
 
 %description -n %develname
@@ -95,10 +93,10 @@ rm -rf $RPM_BUILD_ROOT
 %_libdir/%name-%api/loaders/libpythonloader.*
 %_libdir/%name-%api/loaders/libseedloader.*
 
-%files -n %libnameui
+%files -n %libnamegtk
 %defattr(-,root,root,-)
-%{_libdir}/libpeasui-%api.so.%{major}*
-%{_libdir}/girepository-1.0/PeasUI-%api.typelib
+%{_libdir}/libpeas-gtk-%api.so.%{major}*
+%{_libdir}/girepository-1.0/PeasGtk-%api.typelib
 
 %files -n %develname
 %defattr(-,root,root,-)
@@ -109,7 +107,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/*.so
 %{_libdir}/*.la
 %{_libdir}/pkgconfig/%{name}-%api.pc
-%{_libdir}/pkgconfig/%{name}ui-%api.pc
+%{_libdir}/pkgconfig/%{name}-gtk-%api.pc
 %{_datadir}/gtk-doc/html/%name
 %{_datadir}/gir-1.0/Peas-%api.gir
-%{_datadir}/gir-1.0/PeasUI-%api.gir
+%{_datadir}/gir-1.0/PeasGtk-%api.gir
