@@ -8,13 +8,14 @@
 
 Name:           libpeas
 Version:        0.5.5
-Release:        %mkrel 1
+Release:        %mkrel 2
 Summary:        Library for plugin handling
 
 Group:          System/Libraries
 License:        LGPLv2+
 URL:            http://www.gnome.org/
 Source0: http://ftp.gnome.org/pub/GNOME/sources/%name/%{name}-%{version}.tar.bz2
+Patch0: libpeas-build-with-latest-gtk.patch
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root
 %if %build_gtk3
 BuildRequires:  gtk+3-devel
@@ -64,6 +65,7 @@ developing applications that use %{name}.
 
 %prep
 %setup -q
+%apply_patches
 
 %build
 %configure2_5x --disable-static
