@@ -7,22 +7,20 @@
 %define build_gtk3 1
 
 Name:           libpeas
-Version:        0.5.5
-Release:        %mkrel 3
+Version:        0.7.4
+Release:        %mkrel 1
 Summary:        Library for plugin handling
-
 Group:          System/Libraries
 License:        LGPLv2+
 URL:            http://www.gnome.org/
 Source0: http://ftp.gnome.org/pub/GNOME/sources/%name/%{name}-%{version}.tar.bz2
-Patch0: libpeas-build-with-latest-gtk.patch
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root
 %if %build_gtk3
 BuildRequires:  gtk+3-devel
 %endif
-BuildRequires:  gobject-introspection-devel >= 0.9.2
+BuildRequires:  gobject-introspection-devel >= 0.10.1
 BuildRequires:  python-gobject-devel
-BuildRequires:  seed-devel
+BuildRequires:  seed-devel >= 2.28.0
 BuildRequires:  gtk-doc
 BuildRequires:  intltool
 
@@ -65,10 +63,9 @@ developing applications that use %{name}.
 
 %prep
 %setup -q
-%apply_patches
 
 %build
-%configure2_5x --disable-static
+%configure2_5x --disable-static --disable-vala --disable-python
 %make
 
 %install
@@ -79,8 +76,6 @@ rm -rf $RPM_BUILD_ROOT
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%check
-
 %files data -f %name.lang
 %defattr(-,root,root,-)
 %_datadir/icons/hicolor/*/actions/*
@@ -88,11 +83,9 @@ rm -rf $RPM_BUILD_ROOT
 %files -n %libname
 %defattr(-,root,root,-)
 %doc AUTHORS
-#NEWS README
 %{_libdir}/libpeas-%api.so.%{major}*
 %{_libdir}/girepository-1.0/Peas-%api.typelib
 %_libdir/%name-%api/loaders/libcloader.*
-%_libdir/%name-%api/loaders/libpythonloader.*
 %_libdir/%name-%api/loaders/libseedloader.*
 
 %files -n %libnamegtk
