@@ -1,11 +1,12 @@
 %define api 1.0
 %define major 0
 %define girmajor	1.0
+%define oname		peas
 
-%define libname 	%mklibname peas %major
-%define libgtk		%mklibname peas-gtk %major
-%define develname	%mklibname -d peas
-%define develgtk	%mklibname -d peas-gtk
+%define libname 	%mklibname %{oname} %{major}
+%define libgtk		%mklibname %{oname}-gtk %{major}
+%define develname	%mklibname -d %{oname}
+%define develgtk	%mklibname -d %{oname}-gtk
 %define girname		%mklibname %{oname}-gir %{girmajor}
 %define girnamegtk	%mklibname %{oname}-gtk-gir %{girmajor}
 
@@ -19,11 +20,13 @@ URL:		http://www.gnome.org/
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/%{name}/%{name}-%{version}.tar.xz
 
 BuildRequires:  intltool
+BuildRequires:  pkgconfig(gjs-internals-1.0) >= 1.29.16
+BuildRequires:	pkgconfig(gladeui-2.0)
 BuildRequires:	pkgconfig(gobject-introspection-1.0) >= 0.10.1
+BuildRequires:  pkgconfig(gtk+-3.0)
+BuildRequires:  pkgconfig(pygobject-3.0) >= 2.90
 BuildRequires:	pkgconfig(python)
 BuildRequires:	pkgconfig(seed)
-BuildRequires:  pkgconfig(gtk+-3.0)
-BuildRequires:  python-gobject-devel >= 2.28
 BuildRequires:  vala-devel >= 0.11.1
 
 %description
@@ -105,34 +108,37 @@ find %{buildroot} -name *.la | xargs rm
 %files data -f %{name}.lang
 %doc AUTHORS
 %{_datadir}/icons/hicolor/*/actions/*
-%{_libdir}/%{name}-%api/loaders/libcloader.*
-%{_libdir}/%{name}-%api/loaders/libpythonloader.*
-%{_libdir}/%{name}-%api/loaders/libseedloader.*
+%{_datadir}/glade/catalogs/libpeas-gtk.xml
+%{_libdir}/%{name}-%{api}/loaders/libcloader.so
+%{_libdir}/%{name}-%{api}/loaders/libgjsloader.so
+%{_libdir}/%{name}-%{api}/loaders/libpythonloader.so
+%{_libdir}/%{name}-%{api}/loaders/libseedloader.so
 
 %files -n %{libname}
-%{_libdir}/libpeas-%api.so.%{major}*
+%{_libdir}/libpeas-%{api}.so.%{major}*
 
 %files -n %{libgtk}
-%{_libdir}/libpeas-gtk-%api.so.%{major}*
+%{_libdir}/libpeas-gtk-%{api}.so.%{major}*
 
 %files -n %{girname}
-%{_libdir}/girepository-1.0/Peas-%api.typelib
+%{_libdir}/girepository-1.0/Peas-%{api}.typelib
 
 %files -n %{girnamegtk}
-%{_libdir}/girepository-1.0/PeasGtk-%api.typelib
+%{_libdir}/girepository-1.0/PeasGtk-%{api}.typelib
 
 %files -n %{develname}
 %doc ChangeLog
 %{_bindir}/peas-demo
 %{_libdir}/peas-demo
-%{_includedir}/libpeas/*
-%{_libdir}/libpeas-1.0.so
-%{_libdir}/pkgconfig/%{name}-%api.pc
-%{_datadir}/gir-1.0/Peas-%api.gir
+%{_includedir}/libpeas-%{api}/libpeas/*
+%{_libdir}/libpeas-%{api}.so
+%{_libdir}/pkgconfig/%{name}-%{api}.pc
+%{_datadir}/gir-1.0/Peas-%{api}.gir
 
 %files -n %{develgtk}
-%{_includedir}/libpeas-gtk/*
+%{_includedir}/libpeas-%{api}/libpeas-gtk/*
 %{_libdir}/libpeas-gtk-1.0.so
-%{_libdir}/pkgconfig/%{name}-gtk-%api.pc
+%{_libdir}/pkgconfig/%{name}-gtk-%{api}.pc
 %{_datadir}/gtk-doc/html/%{name}
-%{_datadir}/gir-1.0/PeasGtk-%api.gir
+%{_datadir}/gir-1.0/PeasGtk-%{api}.gir
+
