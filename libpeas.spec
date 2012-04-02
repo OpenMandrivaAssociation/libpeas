@@ -1,36 +1,40 @@
-%define api 1.0
-%define major 0
-%define girmajor	1.0
 %define oname		peas
 
-%define libname 	%mklibname %{oname} %{major}
-%define libgtk		%mklibname %{oname}-gtk %{major}
-%define develname	%mklibname -d %{oname}
-%define develgtk	%mklibname -d %{oname}-gtk
+%define api		1.0
+%define major		0
+%define libname		%mklibname %{oname} %{api} %{major}
+%define libnamegtk	%mklibname %{oname}-gtk %{api} %{major}
+%define develname	%mklibname %{oname} %{api} -d
+
+%define girmajor	1.0
 %define girname		%mklibname %{oname}-gir %{girmajor}
 %define girnamegtk	%mklibname %{oname}-gtk-gir %{girmajor}
 
+%define url_ver	%(echo %{version}|cut -d. -f1,2)
+
 Name:		libpeas
-Version:	1.2.0
+Version:	1.4.0
 Release:	1
 Summary:	Library for plugin handling
 Group:		System/Libraries
 License:	LGPLv2+
 URL:		http://www.gnome.org/
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/%{name}/%{name}-%{version}.tar.xz
-
-BuildRequires:  intltool
-BuildRequires:  pkgconfig(gjs-internals-1.0) >= 1.29.16
-BuildRequires:	pkgconfig(gladeui-2.0)
+Source0:	http://download.gnome.org/sources/%{name}/%{url_ver}/%{name}-%{version}.tar.xz
+Patch0:		libpeas-pkgconfig-variable.patch
+BuildRequires:	intltool
 BuildRequires:	pkgconfig(gobject-introspection-1.0) >= 0.10.1
-BuildRequires:  pkgconfig(gtk+-3.0)
-BuildRequires:  pkgconfig(pygobject-3.0) >= 2.90
 BuildRequires:	pkgconfig(python)
 BuildRequires:	pkgconfig(seed)
-BuildRequires:  vala-devel >= 0.11.1
+BuildRequires:	pkgconfig(pygobject-3.0) >= 2.90
+BuildRequires:	pkgconfig(gjs-internals-1.0) >= 1.31.11
+BuildRequires:	pkgconfig(gladeui-2.0)
+BuildRequires:	vala >= 0.14.0.22
+BuildRequires:	gettext-devel
 
 %description
 This is GNOME's plugin handling library.
+
+#--------------------------------------------------------------------
 
 %package data
 Summary:	Library for plugin handling - data files
@@ -39,19 +43,70 @@ Group:		System/Libraries
 %description data
 This is GNOME's plugin handling library - data files
 
+%files data -f %{name}.lang
+%{_datadir}/icons/hicolor/*/actions/*
+%{_datadir}/glade/catalogs/libpeas-gtk.xml
+
+#--------------------------------------------------------------------
+
 %package -n %{libname}
 Summary:	Library plugin handling
 Group:		System/Libraries
+Requires:	%{name}-data = %{version}-%{release}
+Provides:	%{mklibname %{oname} %{major}} = %{version}-%{release}
+Obsoletes:	%{mklibname %{oname} %{major}} < 1.1.1
 
 %description -n %{libname}
 This is GNOME's plugin handling library.
 
-%package -n %{libgtk}
+%files -n %{libname}
+%doc AUTHORS
+%{_libdir}/%{name}-%{api}.so.%{major}*
+%{_libdir}/%{name}-%{api}/loaders/libpythonloader.so
+%{_libdir}/%{name}-%{api}/loaders/libseedloader.so
+%{_libdir}/%{name}-%{api}/loaders/libgjsloader.so
+#--------------------------------------------------------------------
+%package -n %{libnamegtk}
 Summary:	Library plugin handling UI part
 Group:		System/Libraries
+Requires:	%{name}-data = %{version}-%{release}
+Provides:	%{mklibname %{oname}-gtk %{major}} = %{version}-%{release}
+Obsoletes:	%{mklibname %{oname}-gtk %{major}} < 1.1.1
 
-%description -n %{libgtk}
+%description -n %{libnamegtk}
 This is GNOME's plugin handling library - user interface part.
+
+%files -n %{libnamegtk}
+%{_libdir}/lib%{oname}-gtk-%{api}.so.%{major}*
+
+#--------------------------------------------------------------------
+
+%package -n %{develname}
+Summary:	Development files for %{name}
+Group:		Development/C
+Requires:	%{libname} = %{version}-%{release}
+Requires:	%{libnamegtk} = %{version}-%{release}
+Provides:	%{name}-devel = %version-%release
+Provides:	%{oname}-devel = %{version}-%{release}
+Obsoletes:	%{mklibname -d %{oname} } < 1.1.1
+
+%description -n %{develname}
+The %{name}-devel package contains libraries and header files for
+developing applications that use %{name}.
+
+%files -n %{develname}
+%doc ChangeLog	
+%doc %{_datadir}/gtk-doc/html/%{name}
+%{_bindir}/peas-demo
+%{_libdir}/peas-demo
+%{_includedir}/*
+%{_libdir}/*.so
+%{_libdir}/pkgconfig/%{name}-%{api}.pc
+%{_libdir}/pkgconfig/%{name}-gtk-%{api}.pc
+%{_datadir}/gir-1.0/Peas-%{api}.gir
+%{_datadir}/gir-1.0/PeasGtk-%{api}.gir
+
+#--------------------------------------------------------------------
 
 %package -n %{girname}
 Summary:	GObject Introspection interface description for %{name}
@@ -61,84 +116,39 @@ Requires:	%{libname} = %{version}-%{release}
 %description -n %{girname}
 GObject Introspection interface description for %{name}.
 
+%files -n %{girname}
+%{_libdir}/girepository-1.0/Peas-%{girmajor}.typelib
+
+#--------------------------------------------------------------------
+
 %package -n %{girnamegtk}
 Summary:	GObject Introspection interface description for %{name}-gtk
 Group:		System/Libraries
-Requires:	%{libgtk} = %{version}-%{release}
+Requires:	%{libnamegtk} = %{version}-%{release}
 
 %description -n %{girnamegtk}
 GObject Introspection interface description for %{name}-gtk.
 
-%package -n %{develname}
-Summary:	Development files for %{name}
-Group:		Development/C
-Requires:	%{libname} = %{version}-%{release}
-Provides:	%{name}-devel = %{version}-%{release}
+%files -n %{girnamegtk}
+%{_libdir}/girepository-1.0/PeasGtk-%{girmajor}.typelib
 
-%description -n %{develname}
-The %{name}-devel package contains libraries and header files for
-developing applications that use %{name}.
-
-%package -n %{develgtk}
-Summary:	Development files for %{name}-gtk
-Group:		Development/C
-Requires:	%{libgtk} = %{version}-%{release}
-Provides:	%{name}-gtk-devel = %{version}-%{release}
-
-%description -n %{develgtk}
-The %{name}-gtk-devel package contains libraries and header files for
-developing applications that use %{name}-gtk.
+#--------------------------------------------------------------------
 
 %prep
 %setup -q
-%apply_patches
+%patch0 -p1
 
 %build
-%configure2_5x \
-	--disable-static
-
+autoreconf -fi
+intltoolize -f
+autoreconf
+%configure2_5x --disable-static
 %make
 
 %install
-rm -rf %{buildroot}
 %makeinstall_std
-find %{buildroot} -name *.la | xargs rm
+
 %find_lang %{name}
 
-%files data -f %{name}.lang
-%doc AUTHORS
-%{_datadir}/icons/hicolor/*/actions/*
-%{_datadir}/glade/catalogs/libpeas-gtk.xml
-%{_libdir}/%{name}-%{api}/loaders/libcloader.so
-%{_libdir}/%{name}-%{api}/loaders/libgjsloader.so
-%{_libdir}/%{name}-%{api}/loaders/libpythonloader.so
-%{_libdir}/%{name}-%{api}/loaders/libseedloader.so
-
-%files -n %{libname}
-%{_libdir}/libpeas-%{api}.so.%{major}*
-
-%files -n %{libgtk}
-%{_libdir}/libpeas-gtk-%{api}.so.%{major}*
-
-%files -n %{girname}
-%{_libdir}/girepository-1.0/Peas-%{api}.typelib
-
-%files -n %{girnamegtk}
-%{_libdir}/girepository-1.0/PeasGtk-%{api}.typelib
-
-%files -n %{develname}
-%doc ChangeLog
-%{_bindir}/peas-demo
-%{_libdir}/peas-demo
-%{_includedir}/libpeas-%{api}/libpeas/*
-%{_libdir}/libpeas-%{api}.so
-%{_libdir}/pkgconfig/%{name}-%{api}.pc
-%{_datadir}/gir-1.0/Peas-%{api}.gir
-
-%files -n %{develgtk}
-%{_includedir}/libpeas-%{api}/libpeas-gtk/*
-%{_libdir}/libpeas-gtk-1.0.so
-%{_libdir}/pkgconfig/%{name}-gtk-%{api}.pc
-%{_datadir}/gtk-doc/html/%{name}
-%{_datadir}/gir-1.0/PeasGtk-%{api}.gir
-
+# we don't want these
+find %{buildroot} -name "*.la" -delete
