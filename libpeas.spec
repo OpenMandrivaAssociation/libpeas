@@ -20,6 +20,8 @@ License:	LGPLv2+
 URL:		http://www.gnome.org/
 Source0:	http://download.gnome.org/sources/libpeas/%{url_ver}/%{name}-%{version}.tar.xz
 Patch0:		libpeas-pkgconfig-variable.patch
+
+BuildRequires:	gnome-common
 BuildRequires:	intltool
 BuildRequires:	vala >= 0.14.0.22
 BuildRequires:	gettext-devel
@@ -94,7 +96,7 @@ developing applications that use %{name}.
 %apply_patches
 
 %build
-autoreconf -fi
+autoreconf
 %configure2_5x \
 	--disable-static
 %make
