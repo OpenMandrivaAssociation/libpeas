@@ -13,14 +13,12 @@
 
 Summary:	Library for plugin handling
 Name:		libpeas
-Version:	1.4.0
-Release:	2
+Version:	1.6.0
+Release:	1
 Group:		System/Libraries
 License:	LGPLv2+
 URL:		http://www.gnome.org/
 Source0:	http://download.gnome.org/sources/libpeas/%{url_ver}/%{name}-%{version}.tar.xz
-Patch0:		libpeas-pkgconfig-variable.patch
-
 BuildRequires:	gnome-common
 BuildRequires:	intltool
 BuildRequires:	vala >= 0.14.0.22
@@ -93,7 +91,6 @@ developing applications that use %{name}.
 
 %prep
 %setup -q
-%apply_patches
 
 %build
 autoreconf
