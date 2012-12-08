@@ -1,19 +1,17 @@
 %define url_ver	%(echo %{version}|cut -d. -f1,2)
 
-%define oname		peas
-%define api		1.0
-%define major		0
-%define libname		%mklibname %{oname} %{api} %{major}
-%define libnamegtk	%mklibname %{oname}-gtk %{api} %{major}
-%define develname	%mklibname %{oname} %{api} -d
-
-%define girmajor	1.0
-%define girname		%mklibname %{oname}-gir %{girmajor}
-%define girnamegtk	%mklibname %{oname}-gtk-gir %{girmajor}
+%define oname	peas
+%define api	1.0
+%define major	0
+%define libname	%mklibname %{oname} %{api} %{major}
+%define libgtk	%mklibname %{oname}-gtk %{api} %{major}
+%define devname	%mklibname %{oname} %{api} -d
+%define girname	%mklibname %{oname}-gir %{api}
+%define girgtk	%mklibname %{oname}-gtk-gir %{api}
 
 Summary:	Library for plugin handling
 Name:		libpeas
-Version:	1.6.0
+Version:	1.6.1
 Release:	1
 Group:		System/Libraries
 License:	LGPLv2+
@@ -50,14 +48,14 @@ Obsoletes:	%{mklibname %{oname} %{major}} < 1.1.1
 %description -n %{libname}
 This is GNOME's plugin handling library.
 
-%package -n %{libnamegtk}
+%package -n %{libgtk}
 Summary:	Library plugin handling UI part
 Group:		System/Libraries
 Requires:	%{name}-data = %{version}-%{release}
 Provides:	%{mklibname %{oname}-gtk %{major}} = %{version}-%{release}
 Obsoletes:	%{mklibname %{oname}-gtk %{major}} < 1.1.1
 
-%description -n %{libnamegtk}
+%description -n %{libgtk}
 This is GNOME's plugin handling library - user interface part.
 
 %package -n %{girname}
@@ -67,25 +65,25 @@ Group:		System/Libraries
 %description -n %{girname}
 GObject Introspection interface description for %{name}.
 
-%package -n %{girnamegtk}
+%package -n %{girgtk}
 Summary:	GObject Introspection interface description for %{name}-gtk
 Group:		System/Libraries
 
-%description -n %{girnamegtk}
+%description -n %{girgtk}
 GObject Introspection interface description for %{name}-gtk.
 
-%package -n %{develname}
+%package -n %{devname}
 Summary:	Development files for %{name}
 Group:		Development/C
 Requires:	%{libname} = %{version}-%{release}
-Requires:	%{libnamegtk} = %{version}-%{release}
+Requires:	%{libgtk} = %{version}-%{release}
 Requires:	%{girname} = %{version}-%{release}
-Requires:	%{girnamegtk} = %{version}-%{release}
+Requires:	%{girgtk} = %{version}-%{release}
 Provides:	%{name}-devel = %version-%release
 Provides:	%{oname}-devel = %{version}-%{release}
 Obsoletes:	%{mklibname -d %{oname} } < 1.1.1
 
-%description -n %{develname}
+%description -n %{devname}
 The %{name}-devel package contains libraries and header files for
 developing applications that use %{name}.
 
@@ -117,16 +115,16 @@ find %{buildroot} -name "*.la" -delete
 %{_libdir}/%{name}-%{api}/loaders/libseedloader.so
 %{_libdir}/%{name}-%{api}/loaders/libgjsloader.so
 
-%files -n %{libnamegtk}
+%files -n %{libgtk}
 %{_libdir}/lib%{oname}-gtk-%{api}.so.%{major}*
 
 %files -n %{girname}
-%{_libdir}/girepository-1.0/Peas-%{girmajor}.typelib
+%{_libdir}/girepository-1.0/Peas-%{api}.typelib
 
-%files -n %{girnamegtk}
-%{_libdir}/girepository-1.0/PeasGtk-%{girmajor}.typelib
+%files -n %{girgtk}
+%{_libdir}/girepository-1.0/PeasGtk-%{api}.typelib
 
-%files -n %{develname}
+%files -n %{devname}
 %doc ChangeLog	
 %doc %{_datadir}/gtk-doc/html/%{name}
 %{_bindir}/peas-demo
