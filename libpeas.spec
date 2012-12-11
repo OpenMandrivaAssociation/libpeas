@@ -16,7 +16,7 @@ Release:	1
 Group:		System/Libraries
 License:	LGPLv2+
 URL:		http://www.gnome.org/
-Source0:	http://download.gnome.org/sources/libpeas/%{url_ver}/%{name}-%{version}.tar.xz
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/libpeas/%{url_ver}/%{name}-%{version}.tar.xz
 
 BuildRequires:	gnome-common
 BuildRequires:	intltool
