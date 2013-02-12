@@ -1,0 +1,177 @@
+--- libpeas-1.6.2/loaders/gjs/Makefile.am~	2013-02-12 19:14:36.168391039 +0100
++++ libpeas-1.6.2/loaders/gjs/Makefile.am	2013-02-12 19:14:37.626407098 +0100
+@@ -10,6 +10,10 @@ INCLUDES = \
+ 	$(DISABLE_DEPRECATED)		\
+ 	$(GJS_CFLAGS)
+ 
++LIBS = \
++       -L$(top_builddir)/libpeas \
++       -lpeas-1.0
++
+ loader_LTLIBRARIES = libgjsloader.la
+ 
+ libgjsloader_la_SOURCES = \
+--- libpeas-1.6.2/loaders/python/Makefile.am~	2012-07-15 21:06:08.000000000 +0200
++++ libpeas-1.6.2/loaders/python/Makefile.am	2013-02-12 19:13:34.856715737 +0100
+@@ -12,6 +12,10 @@ INCLUDES = \
+ 	-DPEAS_PYEXECDIR=\""$(pyexecdir)"\" \
+ 	-DPEAS_LOCALEDIR=\""$(prefix)/$(DATADIRNAME)/locale"\"
+ 
++LIBS = \
++       -L$(top_builddir)/libpeas \
++       -lpeas-1.0
++
+ loader_LTLIBRARIES = libpythonloader.la
+ 
+ libpythonloader_la_SOURCES = \
+--- libpeas-1.6.2/loaders/seed/Makefile.am~	2012-07-15 21:06:08.000000000 +0200
++++ libpeas-1.6.2/loaders/seed/Makefile.am	2013-02-12 19:13:54.984937435 +0100
+@@ -10,6 +10,10 @@ INCLUDES = \
+ 	$(DISABLE_DEPRECATED)		\
+ 	$(SEED_CFLAGS)
+ 
++LIBS = \
++       -L$(top_builddir)/libpeas \
++       -lpeas-1.0
++
+ loader_LTLIBRARIES = libseedloader.la
+ 
+ libseedloader_la_SOURCES = \
+--- libpeas-1.6.2/peas-demo/Makefile.am~	2012-07-15 21:06:08.000000000 +0200
++++ libpeas-1.6.2/peas-demo/Makefile.am	2013-02-12 19:14:30.197325272 +0100
+@@ -10,6 +10,10 @@ INCLUDES =								\
+ 	$(WARN_CFLAGS)							\
+ 	$(DISABLE_DEPRECATED)
+ 
++LIBS = \
++       -L$(top_builddir)/libpeas \
++       -lpeas-1.0
++
+ peas_demo_SOURCES = \
+ 	peas-demo-window.c		\
+ 	peas-demo-window.h		\
+--- libpeas-1.6.2/peas-demo/plugins/helloworld/Makefile.am~	2013-02-12 19:16:03.917357519 +0100
++++ libpeas-1.6.2/peas-demo/plugins/helloworld/Makefile.am	2013-02-12 19:16:05.367373489 +0100
+@@ -5,6 +5,12 @@ INCLUDES = \
+ 	$(PEAS_CFLAGS)		\
+ 	$(PEAS_GTK_CFLAGS)
+ 
++LIBS = \
++       -L$(top_builddir)/libpeas \
++       -lpeas-1.0 \
++       -L$(top_builddir)/libpeas-gtk \
++       -lpeas-gtk-1.0
++
+ plugin_LTLIBRARIES = libhelloworld.la
+ 
+ libhelloworld_la_SOURCES = \
+--- libpeas-1.6.2/peas-demo/plugins/secondtime/Makefile.am~	2013-02-12 19:16:29.893643624 +0100
++++ libpeas-1.6.2/peas-demo/plugins/secondtime/Makefile.am	2013-02-12 19:16:31.196657975 +0100
+@@ -5,6 +5,10 @@ INCLUDES = \
+ 	$(PEAS_CFLAGS)		\
+ 	$(PEAS_GTK_CFLAGS)
+ 
++LIBS = \
++       -L$(top_builddir)/libpeas \
++       -lpeas-1.0
++
+ plugin_LTLIBRARIES = libsecondtime.la
+ 
+ libsecondtime_la_SOURCES = \
+--- libpeas-1.6.2/tests/libpeas-gtk/Makefile.am~	2012-07-15 21:06:08.000000000 +0200
++++ libpeas-1.6.2/tests/libpeas-gtk/Makefile.am	2013-02-12 19:18:43.888119437 +0100
+@@ -14,6 +14,12 @@ INCLUDES = \
+ 	$(WARN_CFLAGS)			\
+ 	$(DISABLE_DEPRECATED)
+ 
++LIBS = \
++       -L$(top_builddir)/libpeas \
++       -lpeas-1.0 \
++       -L$(top_builddir)/libpeas-gtk \
++       -lpeas-gtk-1.0
++
+ noinst_PROGRAMS = $(TEST_PROGS)
+ 
+ progs_ldadd = \
+--- libpeas-1.6.2/tests/libpeas-gtk/plugins/builtin-configurable/Makefile.am~	2012-07-15 21:06:08.000000000 +0200
++++ libpeas-1.6.2/tests/libpeas-gtk/plugins/builtin-configurable/Makefile.am	2013-02-12 19:19:29.820233534 +0100
+@@ -7,6 +7,12 @@ INCLUDES = \
+ 	$(WARN_CFLAGS)		\
+ 	$(DISABLE_DEPRECATED)
+ 
++LIBS = \
++       -L$(top_builddir)/libpeas \
++       -lpeas-1.0 \
++       -L$(top_builddir)/libpeas-gtk \
++       -lpeas-gtk-1.0
++
+ noinst_LTLIBRARIES = libbuiltin-configurable.la
+ 
+ libbuiltin_configurable_la_SOURCES = \
+--- libpeas-1.6.2/tests/libpeas-gtk/plugins/configurable/Makefile.am~	2012-07-15 21:06:08.000000000 +0200
++++ libpeas-1.6.2/tests/libpeas-gtk/plugins/configurable/Makefile.am	2013-02-12 19:20:41.097561157 +0100
+@@ -7,6 +7,12 @@ INCLUDES = \
+ 	$(WARN_CFLAGS)		\
+ 	$(DISABLE_DEPRECATED)
+ 
++LIBS = \
++       -L$(top_builddir)/libpeas \
++       -lpeas-1.0 \
++       -L$(top_builddir)/libpeas-gtk \
++       -lpeas-gtk-1.0
++
+ noinst_LTLIBRARIES = libconfigurable.la
+ 
+ libconfigurable_la_SOURCES = \
+--- libpeas-1.6.2/tests/plugins/builtin/Makefile.am~	2012-07-15 21:06:08.000000000 +0200
++++ libpeas-1.6.2/tests/plugins/builtin/Makefile.am	2013-02-12 19:17:03.728016277 +0100
+@@ -6,6 +6,10 @@ INCLUDES = \
+ 	$(WARN_CFLAGS)		\
+ 	$(DISABLE_DEPRECATED)
+ 
++LIBS = \
++       -L$(top_builddir)/libpeas \
++       -lpeas-1.0
++
+ noinst_LTLIBRARIES = libbuiltin.la
+ 
+ libbuiltin_la_SOURCES = \
+--- libpeas-1.6.2/tests/plugins/has-dep/Makefile.am~	2012-07-15 21:06:08.000000000 +0200
++++ libpeas-1.6.2/tests/plugins/has-dep/Makefile.am	2013-02-12 19:17:17.781171059 +0100
+@@ -6,6 +6,10 @@ INCLUDES = \
+ 	$(WARN_CFLAGS)		\
+ 	$(DISABLE_DEPRECATED)
+ 
++LIBS = \
++       -L$(top_builddir)/libpeas \
++       -lpeas-1.0
++
+ noinst_LTLIBRARIES = libhas-dep.la
+ 
+ libhas_dep_la_SOURCES = \
+--- libpeas-1.6.2/tests/plugins/loadable/Makefile.am~	2012-07-15 21:06:08.000000000 +0200
++++ libpeas-1.6.2/tests/plugins/loadable/Makefile.am	2013-02-12 19:17:30.856315069 +0100
+@@ -6,6 +6,10 @@ INCLUDES = \
+ 	$(WARN_CFLAGS)		\
+ 	$(DISABLE_DEPRECATED)
+ 
++LIBS = \
++       -L$(top_builddir)/libpeas \
++       -lpeas-1.0
++
+ noinst_LTLIBRARIES = libloadable.la
+ 
+ libloadable_la_SOURCES = \
+--- libpeas-1.6.2/tests/plugins/self-dep/Makefile.am~	2012-07-15 21:06:08.000000000 +0200
++++ libpeas-1.6.2/tests/plugins/self-dep/Makefile.am	2013-02-12 19:17:44.414464398 +0100
+@@ -6,6 +6,10 @@ INCLUDES = \
+ 	$(WARN_CFLAGS)		\
+ 	$(DISABLE_DEPRECATED)
+ 
++LIBS = \
++       -L$(top_builddir)/libpeas \
++       -lpeas-1.0
++
+ noinst_LTLIBRARIES = libself-dep.la
+ 
+ libself_dep_la_SOURCES = \
