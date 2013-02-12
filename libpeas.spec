@@ -103,9 +103,6 @@ autoreconf
 
 %find_lang %{name}
 
-# we don't want these
-find %{buildroot} -name "*.la" -delete
-
 %files data -f %{name}.lang
 %doc AUTHORS
 %{_datadir}/icons/hicolor/*/actions/*
@@ -137,4 +134,3 @@ find %{buildroot} -name "*.la" -delete
 %{_libdir}/pkgconfig/%{name}-gtk-%{api}.pc
 %{_datadir}/gir-1.0/Peas-%{api}.gir
 %{_datadir}/gir-1.0/PeasGtk-%{api}.gir
-
