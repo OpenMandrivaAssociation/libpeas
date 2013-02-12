@@ -12,7 +12,7 @@
 Summary:	Library for plugin handling
 Name:		libpeas
 Version:	1.6.2
-Release:	1
+Release:	2
 Group:		System/Libraries
 License:	LGPLv2+
 URL:		http://www.gnome.org/
@@ -92,9 +92,9 @@ developing applications that use %{name}.
 %prep
 %setup -q
 %patch0 -p1 -b .underlink~
+autoreconf
 
 %build
-autoreconf
 %configure2_5x \
 	--disable-static
 
