@@ -17,6 +17,7 @@ Group:		System/Libraries
 License:	LGPLv2+
 URL:		http://www.gnome.org/
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/libpeas/%{url_ver}/%{name}-%{version}.tar.xz
+Patch0:		libpeas-1.6.2-link-plugins.patch
 
 BuildRequires:	gnome-common
 BuildRequires:	intltool
@@ -90,6 +91,7 @@ developing applications that use %{name}.
 
 %prep
 %setup -q
+%patch0 -p1 -b .underlink~
 
 %build
 autoreconf
