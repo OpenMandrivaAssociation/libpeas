@@ -15,7 +15,7 @@ Version:	1.6.2
 Release:	2
 Group:		System/Libraries
 License:	LGPLv2+
-URL:		http://www.gnome.org/
+Url:		http://www.gnome.org/
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/libpeas/%{url_ver}/%{name}-%{version}.tar.xz
 Patch0:		libpeas-1.6.2-link-plugins.patch
 
@@ -23,12 +23,12 @@ BuildRequires:	gnome-common
 BuildRequires:	intltool
 BuildRequires:	vala >= 0.14.0.22
 BuildRequires:	gettext-devel
-BuildRequires:	pkgconfig(gobject-introspection-1.0)
-BuildRequires:	pkgconfig(python)
-BuildRequires:	pkgconfig(seed)
-BuildRequires:	pkgconfig(pygobject-3.0)
 BuildRequires:	pkgconfig(gjs-internals-1.0)
 BuildRequires:	pkgconfig(gladeui-2.0)
+BuildRequires:	pkgconfig(gobject-introspection-1.0)
+BuildRequires:	pkgconfig(pygobject-3.0)
+BuildRequires:	pkgconfig(python)
+BuildRequires:	pkgconfig(seed)
 
 %description
 This is GNOME's plugin handling library.
@@ -44,8 +44,6 @@ This is GNOME's plugin handling library - data files
 Summary:	Library plugin handling
 Group:		System/Libraries
 Requires:	%{name}-data = %{version}-%{release}
-Provides:	%{mklibname %{oname} %{major}} = %{version}-%{release}
-Obsoletes:	%{mklibname %{oname} %{major}} < 1.1.1
 
 %description -n %{libname}
 This is GNOME's plugin handling library.
@@ -54,8 +52,6 @@ This is GNOME's plugin handling library.
 Summary:	Library plugin handling UI part
 Group:		System/Libraries
 Requires:	%{name}-data = %{version}-%{release}
-Provides:	%{mklibname %{oname}-gtk %{major}} = %{version}-%{release}
-Obsoletes:	%{mklibname %{oname}-gtk %{major}} < 1.1.1
 
 %description -n %{libgtk}
 This is GNOME's plugin handling library - user interface part.
@@ -83,7 +79,6 @@ Requires:	%{girname} = %{version}-%{release}
 Requires:	%{girgtk} = %{version}-%{release}
 Provides:	%{name}-devel = %version-%release
 Provides:	%{oname}-devel = %{version}-%{release}
-Obsoletes:	%{mklibname -d %{oname} } < 1.1.1
 
 %description -n %{devname}
 The %{name}-devel package contains libraries and header files for
@@ -91,7 +86,7 @@ developing applications that use %{name}.
 
 %prep
 %setup -q
-%patch0 -p1 -b .underlink~
+%apply_patches
 autoreconf
 
 %build
@@ -107,7 +102,7 @@ autoreconf
 
 %files data -f %{name}.lang
 %doc AUTHORS
-%{_datadir}/icons/hicolor/*/actions/*
+%{_iconsdir}/hicolor/*/actions/*
 %{_datadir}/glade/catalogs/libpeas-gtk.xml
 
 %files -n %{libname}
@@ -136,3 +131,4 @@ autoreconf
 %{_libdir}/pkgconfig/%{name}-gtk-%{api}.pc
 %{_datadir}/gir-1.0/Peas-%{api}.gir
 %{_datadir}/gir-1.0/PeasGtk-%{api}.gir
+
