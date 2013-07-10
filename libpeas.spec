@@ -8,6 +8,7 @@
 %define devname	%mklibname %{oname} %{api} -d
 %define girname	%mklibname %{oname}-gir %{api}
 %define girgtk	%mklibname %{oname}-gtk-gir %{api}
+%define _disable_ld_no_undefined 1
 
 Summary:	Library for plugin handling
 Name:		libpeas
