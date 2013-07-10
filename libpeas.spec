@@ -11,8 +11,8 @@
 
 Summary:	Library for plugin handling
 Name:		libpeas
-Version:	1.6.2
-Release:	2
+Version:	1.8.1
+Release:	1
 Group:		System/Libraries
 License:	LGPLv2+
 Url:		http://www.gnome.org/
