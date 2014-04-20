@@ -13,7 +13,7 @@
 Summary:	Library for plugin handling
 Name:		libpeas
 Version:	1.8.1
-Release:	2
+Release:	3
 Group:		System/Libraries
 License:	LGPLv2+
 Url:		http://www.gnome.org/
@@ -29,6 +29,7 @@ BuildRequires:	pkgconfig(gladeui-2.0)
 BuildRequires:	pkgconfig(gobject-introspection-1.0)
 BuildRequires:	pkgconfig(pygobject-3.0)
 BuildRequires:	pkgconfig(python)
+BuildRequires:	pkgconfig(python3)
 BuildRequires:	pkgconfig(seed)
 
 %description
