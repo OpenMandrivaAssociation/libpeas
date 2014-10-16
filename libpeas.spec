@@ -12,14 +12,12 @@
 
 Summary:	Library for plugin handling
 Name:		libpeas
-Version:	1.9.0
-Release:	4
+Version:	1.12.1
+Release:	1
 Group:		System/Libraries
 License:	LGPLv2+
 Url:		http://www.gnome.org/
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/libpeas/%{url_ver}/%{name}-%{version}.tar.xz
-Patch0:		libpeas-1.8.1-link-plugins.patch
-Patch1:		fix-autoconf.patch
 
 BuildRequires:	gnome-common
 BuildRequires:	intltool
@@ -90,11 +88,9 @@ developing applications that use %{name}.
 %prep
 %setup -q
 %apply_patches
-autoreconf -fiv
 
 %build
-%configure2_5x \
-	--disable-static
+%configure
 
 %make
 
@@ -113,7 +109,6 @@ autoreconf -fiv
 %{_libdir}/%{name}-%{api}/loaders/libpythonloader.so
 %{_libdir}/%{name}-%{api}/loaders/libpython3loader.so
 %{_libdir}/%{name}-%{api}/loaders/libseedloader.so
-%{_libdir}/%{name}-%{api}/loaders/libgjsloader.so
 
 %files -n %{libgtk}
 %{_libdir}/lib%{oname}-gtk-%{api}.so.%{major}*
