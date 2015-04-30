@@ -12,7 +12,7 @@
 
 Summary:	Library for plugin handling
 Name:		libpeas
-Version:	1.12.1
+Version:	 1.14.0
 Release:	2
 Group:		System/Libraries
 License:	LGPLv2+
@@ -120,7 +120,7 @@ developing applications that use %{name}.
 %{_libdir}/girepository-1.0/PeasGtk-%{api}.typelib
 
 %files -n %{devname}
-%doc ChangeLog	
+%doc ChangeLog
 %doc %{_datadir}/gtk-doc/html/%{name}
 %{_bindir}/peas-demo
 %{_libdir}/peas-demo
