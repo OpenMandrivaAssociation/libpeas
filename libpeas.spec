@@ -1,4 +1,5 @@
 %define url_ver	%(echo %{version}|cut -d. -f1,2)
+%define _disable_rebuild_configure 1
 
 %define oname	peas
 %define api	1.0
@@ -12,8 +13,8 @@
 
 Summary:	Library for plugin handling
 Name:		libpeas
-Version:	 1.14.0
-Release:	2
+Version:	1.16.0
+Release:	1
 Group:		System/Libraries
 License:	LGPLv2+
 Url:		http://www.gnome.org/
