@@ -29,7 +29,6 @@ BuildRequires:	pkgconfig(gobject-introspection-1.0)
 BuildRequires:	pkgconfig(pygobject-3.0)
 BuildRequires:	pkgconfig(gtk+-3.0)
 BuildRequires:	pkgconfig(python3)
-BuildRequires:	pkgconfig(seed)
 BuildRequires:	vala
 
 %description
