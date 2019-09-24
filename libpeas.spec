@@ -118,8 +118,8 @@ The %{name}-devel package contains libraries and header files for
 developing applications that use %{name}.
 
 %files -n %{devname}
-%doc ChangeLog
-%doc %{_datadir}/gtk-doc/html/%{name}
+#doc ChangeLog
+#doc #{_datadir}/gtk-doc/html/%{name}
 %{_bindir}/peas-demo
 %{_libdir}/peas-demo
 %{_includedir}/*
