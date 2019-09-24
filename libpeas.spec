@@ -30,6 +30,7 @@ BuildRequires:	pkgconfig(pygobject-3.0)
 BuildRequires:	pkgconfig(gtk+-3.0)
 BuildRequires:	pkgconfig(python3)
 BuildRequires:	vala
+BuildRequires:  meson
 
 %description
 This is GNOME's plugin handling library.
@@ -135,11 +136,11 @@ developing applications that use %{name}.
 %apply_patches
 
 %build
-%configure
-%make
+%meson
+%meson_build
 
 %install
-%makeinstall_std
+%meson_install
 
 # locales
 %find_lang %{name}
