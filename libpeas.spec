@@ -48,6 +48,7 @@ This is GNOME's plugin handling library - data files
 %doc AUTHORS
 %{_iconsdir}/hicolor/*/actions/*
 %{_datadir}/glade/catalogs/libpeas-gtk.xml
+%{_datadir}/locale/*/LC_MESSAGES/libpeas-1.0.mo
 
 #---------------------------------------------------------------------------
 
