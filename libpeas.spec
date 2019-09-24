@@ -61,7 +61,7 @@ This is GNOME's plugin handling library.
 
 %files -n %{libname}
 %{_libdir}/%{name}-%{api}.so.%{major}*
-%{_libdir}/%{name}-%{api}/loaders/libpythonloader.so
+#{_libdir}/%{name}-%{api}/loaders/libpythonloader.so
 %{_libdir}/%{name}-%{api}/loaders/libpython3loader.so
 
 #---------------------------------------------------------------------------
