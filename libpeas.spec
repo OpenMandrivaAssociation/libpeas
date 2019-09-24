@@ -143,5 +143,5 @@ developing applications that use %{name}.
 %meson_install
 
 # locales
-%find_lang %{name}
+#find_lang %{name}
 
