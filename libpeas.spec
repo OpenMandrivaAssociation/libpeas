@@ -13,8 +13,8 @@
 
 Summary:	Library for plugin handling
 Name:		libpeas
-Version:	1.22.0
-Release:	3
+Version:	1.24.0
+Release:	1
 Group:		System/Libraries
 License:	LGPLv2+
 Url:		https://www.gnome.org/
@@ -30,6 +30,7 @@ BuildRequires:	pkgconfig(pygobject-3.0)
 BuildRequires:	pkgconfig(gtk+-3.0)
 BuildRequires:	pkgconfig(python3)
 BuildRequires:	vala
+BuildRequires:  meson
 
 %description
 This is GNOME's plugin handling library.
@@ -43,10 +44,11 @@ Group:		System/Libraries
 %description data
 This is GNOME's plugin handling library - data files
 
-%files data -f %{name}.lang
+%files data
 %doc AUTHORS
 %{_iconsdir}/hicolor/*/actions/*
 %{_datadir}/glade/catalogs/libpeas-gtk.xml
+%{_datadir}/locale/*/LC_MESSAGES/libpeas-1.0.mo
 
 #---------------------------------------------------------------------------
 
@@ -60,7 +62,7 @@ This is GNOME's plugin handling library.
 
 %files -n %{libname}
 %{_libdir}/%{name}-%{api}.so.%{major}*
-%{_libdir}/%{name}-%{api}/loaders/libpythonloader.so
+#{_libdir}/%{name}-%{api}/loaders/libpythonloader.so
 %{_libdir}/%{name}-%{api}/loaders/libpython3loader.so
 
 #---------------------------------------------------------------------------
@@ -117,8 +119,8 @@ The %{name}-devel package contains libraries and header files for
 developing applications that use %{name}.
 
 %files -n %{devname}
-%doc ChangeLog
-%doc %{_datadir}/gtk-doc/html/%{name}
+#doc ChangeLog
+#doc #{_datadir}/gtk-doc/html/%{name}
 %{_bindir}/peas-demo
 %{_libdir}/peas-demo
 %{_includedir}/*
@@ -135,12 +137,12 @@ developing applications that use %{name}.
 %apply_patches
 
 %build
-%configure
-%make
+%meson
+%meson_build
 
 %install
-%makeinstall_std
+%meson_install
 
 # locales
-%find_lang %{name}
+#find_lang %{name}
 

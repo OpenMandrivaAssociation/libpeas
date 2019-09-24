@@ -1,9 +1,2 @@
-removed_sources:
-  libpeas-1.12.1.tar.xz: 220f858c2cac396fcf7b56ef6b24fa25ae3f28fb
-  libpeas-1.14.0.tar.xz: 18a85ab41f578997ff1e9860ce178d7c5116c616
-  libpeas-1.16.0.tar.xz: d4f3e446718e88d76f4c59cd4862968b8ec145bc
-  libpeas-1.20.0.tar.xz: 3844f00f0ab3ded28c6a8c6c1c3186856bccdc30
-  libpeas-1.8.1.tar.xz: 1ddec9c192b88e45621e22fed5a9c4ae9533315b
-  libpeas-1.9.0.tar.xz: b815ce7c04ab52e6ace7a24e65fd99bcd4291fdb
 sources:
-  libpeas-1.22.0.tar.xz: 2e84a418208ff9a15f16566b552734c1b7af0edc
+  libpeas-1.24.0.tar.xz: 3d80ee1fd158e4908a706e50093552b3a60f10eb
