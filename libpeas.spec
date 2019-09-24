@@ -44,7 +44,7 @@ Group:		System/Libraries
 %description data
 This is GNOME's plugin handling library - data files
 
-%files data -f %{name}.lang
+%files data -f
 %doc AUTHORS
 %{_iconsdir}/hicolor/*/actions/*
 %{_datadir}/glade/catalogs/libpeas-gtk.xml
