@@ -13,7 +13,7 @@
 
 Summary:	Library for plugin handling
 Name:		libpeas
-Version:	1.24.0
+Version:	1.24.1
 Release:	1
 Group:		System/Libraries
 License:	LGPLv2+
