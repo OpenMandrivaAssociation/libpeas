@@ -1,15 +1,15 @@
-%define url_ver	%(echo %{version}|cut -d. -f1,2)
+%define url_ver %(echo %{version}|cut -d. -f1,2)
 %define _disable_rebuild_configure 1
 %define _disable_ld_no_undefined 1
 
-%define oname	peas
-%define api	1.0
-%define major	0
-%define libname	%mklibname %{oname} %{api} %{major}
-%define libgtk	%mklibname %{oname}-gtk %{api} %{major}
-%define devname	%mklibname %{oname} %{api} -d
-%define girname	%mklibname %{oname}-gir %{api}
-%define girgtk	%mklibname %{oname}-gtk-gir %{api}
+%define oname peas
+%define api 1.0
+%define major 0
+%define libname %mklibname %{oname} %{api} %{major}
+%define libgtk %mklibname %{oname}-gtk %{api} %{major}
+%define devname %mklibname %{oname} %{api} -d
+%define girname %mklibname %{oname}-gir %{api}
+%define girgtk %mklibname %{oname}-gtk-gir %{api}
 
 Summary:	Library for plugin handling
 Name:		libpeas
@@ -19,7 +19,6 @@ Group:		System/Libraries
 License:	LGPLv2+
 Url:		https://www.gnome.org/
 Source0:	https://download.gnome.org/sources/%{oname}/%{url_ver}/%{name}-%{version}.tar.xz
-
 BuildRequires:	gnome-common
 BuildRequires:	intltool
 BuildRequires:	gettext-devel
@@ -30,7 +29,8 @@ BuildRequires:	pkgconfig(pygobject-3.0)
 BuildRequires:	pkgconfig(gtk+-3.0)
 BuildRequires:	pkgconfig(python3)
 BuildRequires:	vala
-BuildRequires:  meson
+BuildRequires:	meson
+BuildRequires:	cmake
 
 %description
 This is GNOME's plugin handling library.
@@ -111,7 +111,7 @@ Requires:	%{libname} = %{version}-%{release}
 Requires:	%{libgtk} = %{version}-%{release}
 Requires:	%{girname} = %{version}-%{release}
 Requires:	%{girgtk} = %{version}-%{release}
-Provides:	%{name}-devel = %version-%release
+Provides:	%{name}-devel = %{version}-%{release}
 Provides:	%{oname}-devel = %{version}-%{release}
 
 %description -n %{devname}
