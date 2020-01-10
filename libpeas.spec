@@ -14,12 +14,11 @@
 Summary:	Library for plugin handling
 Name:		libpeas
 Version:	1.24.1
-Release:	2
+Release:	3
 Group:		System/Libraries
 License:	LGPLv2+
 Url:		https://www.gnome.org/
 Source0:	https://download.gnome.org/sources/%{oname}/%{url_ver}/%{name}-%{version}.tar.xz
-BuildRequires:	gnome-common
 BuildRequires:	intltool
 BuildRequires:	gettext-devel
 BuildRequires:	pkgconfig(gio-2.0)
