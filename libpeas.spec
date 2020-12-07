@@ -14,7 +14,7 @@
 Summary:	Library for plugin handling
 Name:		libpeas
 Version:	1.28.0
-Release:	1
+Release:	2
 Group:		System/Libraries
 License:	LGPLv2+
 Url:		https://www.gnome.org/
@@ -26,7 +26,7 @@ BuildRequires:	pkgconfig(gladeui-2.0)
 BuildRequires:	pkgconfig(gobject-introspection-1.0)
 BuildRequires:	pkgconfig(pygobject-3.0)
 BuildRequires:	pkgconfig(gtk+-3.0)
-BuildRequires:	pkgconfig(python3)
+BuildRequires:	pkgconfig(python)
 BuildRequires:	vala
 BuildRequires:	meson
 BuildRequires:	cmake
