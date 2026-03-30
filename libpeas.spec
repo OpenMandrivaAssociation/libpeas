@@ -4,7 +4,7 @@
 
 %define oname peas
 %define api 1.0
-%define major 0
+%define major 1
 %define libname %mklibname %{oname} %{api} %{major}
 %define libgtk %mklibname %{oname}-gtk %{api} %{major}
 %define devname %mklibname %{oname} %{api} -d
@@ -13,8 +13,8 @@
 
 Summary:	Library for plugin handling
 Name:		libpeas
-Version:	1.36.0
-Release:	7
+Version:	1.38.1
+Release:	1
 Group:		System/Libraries
 License:	LGPLv2+
 Url:		https://www.gnome.org/
@@ -24,6 +24,7 @@ BuildRequires:	gettext-devel
 BuildRequires:	pkgconfig(gio-2.0)
 BuildRequires:	pkgconfig(gladeui-2.0)
 BuildRequires:	pkgconfig(gobject-introspection-1.0)
+BuildRequires:  pkgconfig(girepository-2.0)
 BuildRequires:	pkgconfig(pygobject-3.0)
 BuildRequires:	pkgconfig(gtk+-3.0)
 BuildRequires:	pkgconfig(python)
@@ -132,8 +133,7 @@ developing applications that use %{name}.
 #---------------------------------------------------------------------------
 
 %prep
-%setup -q
-%autopatch -p1
+%autosetup -p1
 
 %build
 %meson
