@@ -4,7 +4,7 @@
 
 %define oname peas
 %define api 1.0
-%define major 0
+%define major 1
 %define libname %mklibname %{oname} %{api} %{major}
 %define libgtk %mklibname %{oname}-gtk %{api} %{major}
 %define devname %mklibname %{oname} %{api} -d
